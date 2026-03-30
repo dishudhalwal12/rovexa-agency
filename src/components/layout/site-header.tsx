@@ -204,7 +204,6 @@ export function SiteHeader() {
             fill
             sizes="44px"
             className="object-cover"
-            priority
           />
         </div>
         <span className="font-brand text-[1.9rem] leading-none tracking-[0.01em]">Rovexa</span>
