@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import { ComingSoonPage } from "@/components/layout/coming-soon-page";
+
+export const metadata: Metadata = {
+  title: "Work",
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true
+    }
+  }
+};
 
 export default function WorkPage() {
   return (

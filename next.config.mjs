@@ -8,14 +8,6 @@ const withMDX = createMDX({
 const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   allowedDevOrigins: ["127.0.0.1"],
-  async rewrites() {
-    return [
-      {
-        source: "/favicon.ico",
-        destination: "/images/favicon.png"
-      }
-    ];
-  },
   images: {
     formats: ["image/avif", "image/webp"]
   },

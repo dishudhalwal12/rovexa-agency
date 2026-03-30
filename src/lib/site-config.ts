@@ -1,4 +1,4 @@
-const productionSiteUrl = "https://rovexa.space";
+const productionSiteUrl = "https://rovexa.agency";
 
 function normalizeSiteUrl(value: string | undefined) {
   if (!value) {
@@ -29,8 +29,11 @@ function getSiteUrl() {
 
 export const siteConfig = {
   name: "Rovexa",
-  domain: "rovexa.space",
+  domain: "rovexa.agency",
   url: getSiteUrl(),
+  title: "Rovexa | Creative Growth Agency for Modern Brands",
   description:
-    "Rovexa is a creative growth agency helping brands grow through marketing, creative branding, websites, tech systems, operations, and distribution."
+    "Rovexa is a creative growth agency helping modern brands grow through branding, websites, marketing, and operational systems.",
+  socialDescription:
+    "Rovexa helps modern brands grow through branding, websites, marketing, and operational systems."
 } as const;

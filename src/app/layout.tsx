@@ -7,38 +7,51 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
-  icons: {
-    icon: "/images/favicon.png",
-    shortcut: "/images/favicon.png",
-    apple: "/images/favicon.png"
-  },
   title: {
-    default: "Rovexa",
+    default: siteConfig.title,
     template: "%s | Rovexa"
-  },
-  alternates: {
-    canonical: "/"
   },
   description: siteConfig.description,
   keywords: [
     "Rovexa",
-    "growth agency",
-    "creative branding",
+    "Rovexa agency",
+    "creative growth agency",
+    "branding",
     "website design",
-    "marketing agency",
-    "operations and distribution"
+    "marketing systems",
+    "operational systems"
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  },
   openGraph: {
-    title: "Rovexa",
-    description: siteConfig.description,
+    title: siteConfig.title,
+    description: siteConfig.socialDescription,
     url: siteConfig.url,
-    siteName: "Rovexa",
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.title
+      }
+    ],
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rovexa",
-    description: siteConfig.description
+    title: siteConfig.title,
+    description: siteConfig.socialDescription,
+    images: ["/twitter-image"]
   }
 };
 

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 
-const routes = ["", "/about", "/services", "/work", "/contact", "/blogs"];
+const routes = [""];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
@@ -11,4 +11,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1 : 0.7
   }));
 }
-
