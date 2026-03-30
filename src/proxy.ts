@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const legacyHosts = new Set(["rovexa.space", "www.rovexa.space", "www.rovexa.agency"]);
+const legacyHosts = new Set(["rovexa.space", "www.rovexa.space"]);
 const canonicalHost = "rovexa.agency";
 
 export function proxy(request: NextRequest) {
