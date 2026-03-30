@@ -1,16 +1,19 @@
 const productionSiteUrl = "https://www.rovexa.agency";
 const allowedProductionHosts = new Set(["rovexa.agency", "www.rovexa.agency"]);
 
-function isAllowedSiteHost(hostname: string) {
+function isAllowedSiteHost(hostname: string, allowPreviewHosts: boolean) {
   return (
     allowedProductionHosts.has(hostname) ||
     hostname === "localhost" ||
     hostname === "127.0.0.1" ||
-    hostname.endsWith(".vercel.app")
+    (allowPreviewHosts && hostname.endsWith(".vercel.app"))
   );
 }
 
-function normalizeSiteUrl(value: string | undefined) {
+function normalizeSiteUrl(
+  value: string | undefined,
+  options?: { allowPreviewHosts?: boolean }
+) {
   if (!value) {
     return null;
   }
@@ -28,8 +31,9 @@ function normalizeSiteUrl(value: string | undefined) {
   try {
     const parsedUrl = new URL(candidateUrl);
     const hostname = parsedUrl.hostname.toLowerCase();
+    const allowPreviewHosts = options?.allowPreviewHosts ?? false;
 
-    if (!isAllowedSiteHost(hostname)) {
+    if (!isAllowedSiteHost(hostname, allowPreviewHosts)) {
       return null;
     }
 
@@ -47,10 +51,12 @@ function normalizeSiteUrl(value: string | undefined) {
 }
 
 function getSiteUrl() {
+  const allowPreviewHosts = process.env.VERCEL_ENV === "preview";
+
   return (
-    normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL) ??
-    normalizeSiteUrl(process.env.VERCEL_PROJECT_PRODUCTION_URL) ??
-    normalizeSiteUrl(process.env.VERCEL_URL) ??
+    normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, { allowPreviewHosts }) ??
+    normalizeSiteUrl(process.env.VERCEL_PROJECT_PRODUCTION_URL, { allowPreviewHosts }) ??
+    normalizeSiteUrl(process.env.VERCEL_URL, { allowPreviewHosts }) ??
     productionSiteUrl
   );
 }
