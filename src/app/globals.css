@@ -57,6 +57,10 @@ img {
   font-family: var(--font-heading), sans-serif;
 }
 
+.font-hand {
+  font-family: var(--font-hand), cursive;
+}
+
 .font-body {
   font-family: var(--font-body), sans-serif;
 }
@@ -188,6 +192,23 @@ img {
   to {
     transform: rotate(0deg);
   }
+}
+
+@keyframes rovexa-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.is-spinning {
+  animation-name: rovexa-spin;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 .splash-dot {

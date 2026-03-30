@@ -9,6 +9,7 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent
 } from "react";
+import { AuditButton } from "@/components/ui/audit-button";
 
 const services = [
   {
@@ -59,6 +60,25 @@ const characterCursors = {
 } as const;
 
 type CharacterCursor = keyof typeof characterCursors;
+
+const socialProofAvatars = [
+  {
+    src: "/images/pinda.png",
+    alt: "Client placeholder avatar 1"
+  },
+  {
+    src: "/images/ranveer.png",
+    alt: "Client placeholder avatar 2"
+  },
+  {
+    src: "/images/element.png",
+    alt: "Client placeholder avatar 3"
+  },
+  {
+    src: "/images/logo.png",
+    alt: "Client placeholder avatar 4"
+  }
+] as const;
 
 const cursorImageSize = 180;
 const cursorFaceInset = 40;
@@ -115,6 +135,51 @@ function FlowerBadge({ className }: { className: string }) {
     >
       <div className="relative h-11 w-11 overflow-hidden rounded-full">
         <Image src="/images/logo.png" alt="" fill sizes="44px" className="object-cover" />
+      </div>
+    </div>
+  );
+}
+
+function HeroSocialProof() {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return <div aria-hidden="true" className="mt-7 h-10 w-full" />;
+  }
+
+  return (
+    <div
+      aria-label="Trusted by our clients, 10 plus brands grown"
+      className="mx-auto mt-7 inline-flex items-center justify-center gap-3.5 opacity-[0.92] sm:gap-4"
+    >
+      <div className="flex items-center -space-x-[11px]">
+        {socialProofAvatars.map((avatar) => (
+          <div
+            key={avatar.src}
+            className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-[var(--background)] bg-white/8 shadow-[0_0_0_1px_rgba(255,255,255,0.1)]"
+          >
+            <Image
+              src={avatar.src}
+              alt={avatar.alt}
+              fill
+              sizes="40px"
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="text-left">
+        <p className="font-hand text-[15px] leading-none text-[color:rgba(250,249,246,0.88)]">
+          trusted by our clients
+        </p>
+        <p className="mt-1 text-[11px] leading-none tracking-[0.02em] text-[color:rgba(250,249,246,0.62)]">
+          10+ brands grown
+        </p>
       </div>
     </div>
   );
@@ -511,16 +576,19 @@ function HeroHeadline() {
     >
       <motion.h1
         variants={itemVariants}
-        className="font-heading max-w-[10ch] text-balance text-[3rem] leading-[0.9] tracking-[-0.08em] text-[var(--foreground)] sm:text-[4rem] md:text-[5.1rem] lg:text-[6.5rem]"
+        className="font-heading max-w-[12ch] text-balance text-[clamp(3.25rem,7.1vw,6.35rem)] leading-[0.92] tracking-[-0.07em] text-[var(--foreground)]"
       >
         <span className="block">
-          <span className="inline-block">Growth ki</span>
+          <span className="inline-block">
+            Growth ki yaad
+            <br />
+          </span>
         </span>
-        <span className="mt-1 block bg-gradient-to-r from-[#faf9f6] via-[#f4d3a3] to-[#faf9f6] bg-clip-text text-transparent">
-          <span className="inline-block">yaad nahi aayi,</span>
-        </span>
-        <span className="mt-1 block text-[var(--foreground)]">
-          <span className="inline-block">Jassi?</span>
+        <span className="mt-1 block">
+          <span className="bg-gradient-to-r from-[#faf9f6] via-[#f4d3a3] to-[#faf9f6] bg-clip-text text-transparent">
+            nahi aayi,
+          </span>
+          <span className="text-[var(--foreground)]"> Jassi?</span>
         </span>
       </motion.h1>
 
@@ -528,7 +596,7 @@ function HeroHeadline() {
         <div
           ref={cursorShellRef}
           aria-hidden="true"
-          className="pointer-events-none fixed left-0 top-0 z-[80] will-change-transform"
+          className="pointer-events-none fixed left-0 top-0 z-[10] will-change-transform"
           style={{ transform: "translate3d(-120px, -120px, 0)" }}
         >
           <div
@@ -620,28 +688,27 @@ export function HomeHero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-[1120px] flex-col items-center justify-center pt-18 text-center md:pt-24 lg:pt-28"
+          className="relative z-10 mx-auto flex min-h-[calc(100svh-8rem)] w-full max-w-[1120px] flex-col items-center justify-center pt-24 pb-12 text-center md:pt-28 md:pb-16 lg:pt-32 lg:pb-18"
         >
           <HeroHeadline />
 
           <motion.p
             variants={itemVariants}
-            className="mt-7 max-w-[46rem] text-balance text-base leading-8 text-[var(--muted)] md:text-lg"
+            className="mt-3 max-w-[46rem] text-balance text-[1.05rem] leading-8 text-[var(--muted)] md:mt-4 md:text-[1.18rem]"
           >
             Give me <HeroCountdownInline /> minutes with your brand and I'll show you what's
             been missing.
           </motion.p>
 
+          <motion.div variants={itemVariants}>
+            <HeroSocialProof />
+          </motion.div>
+
           <motion.div
             variants={itemVariants}
-            className="mt-9 flex flex-wrap items-center justify-center gap-4"
+            className="mt-8 flex flex-wrap items-center justify-center gap-4 md:mt-9"
           >
-            <Link
-              href="/contact"
-              className="glass-pill inline-flex min-h-13 items-center justify-center rounded-full px-6 text-sm font-medium text-[var(--foreground)] transition duration-200 hover:-translate-y-0.5 hover:border-white/18 hover:bg-white/10"
-            >
-              Get an audit
-            </Link>
+            <AuditButton size="hero" />
 
             <Link
               href="/services"
